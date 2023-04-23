@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.databaseconnector.mapper.ScriptInfoMapper">
+    <resultMap id="ScriptInfo" type="com.example.databaseconnector.bean.ScriptInfo">
+        <result column="scriptName" property="scriptName"></result>
+        <result column="userId" property="userId"></result>
+        <result column="dataSource" property="dataSource"></result>
+        <result column="context" property="context"></result>
+        <result column="startTime" property="startTime"></result>
+        <result column="executeTimes" property="executeTimes"></result>
+        <result column="status" property="status"></result>
+        <result column="endTime" property="endTime"></result>
+    </resultMap>
+    <update id="updateScript">
+        update test.scriptInfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="#{scriptInfo.context} != null">
+                context = #{scriptInfo.context},
+            </if>
+            <if test="#{scriptInfo.startTime} != null">
+                startTime = #{scriptInfo.startTime},
+            </if>
+            <if test="#{scriptInfo.status} != null">
+                status = #{scriptInfo.status},
+            </if>
+            <if test="#{scriptInfo.executeTimes} != null">
+                executeTimes = #{scriptInfo.executeTimes},
+            </if>
+        </trim>
+
+        where userId = #{scriptInfo.userId}
+        and scriptName = #{scriptInfo.scriptName}
+        and dataSource = #{scriptInfo.dataSource};
+    </update>
+
+    <delete id="deleteScript">
+        delete
+        from test.scriptInfo
+        where userId = #{scriptInfo.userId}
+          and scriptName = #{scriptInfo.scriptName}
+          and dataSource = #{scriptInfo.dataSource};
+    </delete>
+
+    <select id="queryScript" resultMap="ScriptInfo">
+        select *
+        from test.scriptInfo
+        where userId = #{scriptInfo.userId}
+          and scriptName = #{scriptInfo.scriptName}
+          and dataSource = #{scriptInfo.dataSource};
+    </select>
+
+    <select id="queryUnexecutedTask" resultType="com.example.databaseconnector.bean.ScriptInfo">
+        select *
+        from test.scriptInfo
+        where startTime <![CDATA[<=]]> #{now}
+          and status = "ready";
+    </select>
+
+    <select id="queryAllScripts" resultType="com.example.databaseconnector.bean.ScriptInfo">
+        select *
+        from test.scriptInfo
+    </select>
+
+    <insert id="addScript">
+        insert into test.scriptInfo (scriptName, userId, dataSource, context, startTime, executeTimes)
+        values (#{scriptInfo.scriptName}, #{scriptInfo.userId}, #{scriptInfo.dataSource}, #{scriptInfo.context},
+                #{scriptInfo.startTime}, #{scriptInfo.executeTimes})
+    </insert>
+</mapper>

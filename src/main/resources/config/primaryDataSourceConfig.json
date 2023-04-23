@@ -1,0 +1,16 @@
+[
+  {
+    "url": "jdbc:mysql://localhost:3306/database_connector_master?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8",
+    "username": "root",
+    "password": "123456",
+    "driverClassName": "com.mysql.cj.jdbc.Driver",
+    "role": "master"
+  },
+  {
+    "url": "jdbc:mysql://localhost:3306/database_connector_slave?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8",
+    "username": "root",
+    "password": "123456",
+    "driverClassName": "com.mysql.cj.jdbc.Driver",
+    "role": "slave"
+  }
+]

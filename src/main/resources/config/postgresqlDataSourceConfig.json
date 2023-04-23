@@ -1,0 +1,18 @@
+[
+  {
+    "datasourceId": "3",
+    "datasourceName": "postgresql_1",
+    "datasourceType": "postgresql",
+    "url": "jdbc:postgresql://localhost:5432/postgres?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8",
+    "username": "postgres",
+    "password": "123456"
+  },
+  {
+    "datasourceId": "4",
+    "datasourceName": "postgresql_2",
+    "datasourceType": "postgresql",
+    "url": "jdbc:postgresql://localhost:5432/postgres?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8",
+    "username": "postgres",
+    "password": "123456"
+  }
+]
